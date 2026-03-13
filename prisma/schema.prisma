@@ -1,0 +1,81 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/carter_vale_realty/nextjs_space/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Property {
+  id               String   @id @default(cuid())
+  title            String
+  price            Int
+  address          String
+  city             String
+  state            String
+  zipCode          String   @map("zip_code")
+  bedrooms         Int?
+  bathrooms        Float?
+  squareFootage    Int      @map("square_footage")
+  propertyType     String   @map("property_type") // Residential, Commercial, Office, Retail
+  transactionType  String   @map("transaction_type") // Buy, Rent, Lease
+  amenities        String[] @default([])
+  description      String   @db.Text
+  galleryImages    String[] @map("gallery_images") @default([])
+  assignedAgentId  String?  @map("assigned_agent_id")
+  featured         Boolean  @default(false)
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  agent Agent? @relation(fields: [assignedAgentId], references: [id])
+  leads Lead[]
+
+  @@map("properties")
+}
+
+model Agent {
+  id               String   @id @default(cuid())
+  name             String
+  title            String
+  email            String   @unique
+  phone            String
+  photoUrl         String   @map("photo_url")
+  bio              String   @db.Text
+  yearsExperience  Int      @map("years_experience")
+  specialization   String
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  properties Property[]
+
+  @@map("agents")
+}
+
+model Lead {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  phone         String?
+  message       String   @db.Text
+  propertyId    String?  @map("property_id")
+  leadCategory  String   @map("lead_category") // Buyer Inquiry, Seller Inquiry, Commercial Lease Inquiry, Schedule Property Visit, General Question
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  property Property? @relation(fields: [propertyId], references: [id])
+
+  @@map("leads")
+}
+
+model Testimonial {
+  id             String   @id @default(cuid())
+  clientName     String   @map("client_name")
+  clientTitle    String   @map("client_title")
+  testimonialText String  @map("testimonial_text") @db.Text
+  rating         Int
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("testimonials")
+}

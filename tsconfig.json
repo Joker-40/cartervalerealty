@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "es2020"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "lib/**/*.ts",
+    "lib/**/*.tsx",
+    "modules/**/*.ts",
+    "modules/**/*.tsx",
+    "stores/**/*.ts",
+    "stores/**/*.tsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "vitest.setup.ts",
+    ".next/types/**/*.ts",
+    ".build/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "components/**/*",
+    "hooks/**/*",
+    "prisma/**/*",
+    "scripts/**/*",
+    "lib/prisma.ts",
+    "lib/db.ts"
+  ]
+}
