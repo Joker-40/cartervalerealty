@@ -60,7 +60,7 @@ export function PropertyCard({ property }: { property: PropertyDetailModel }) {
             <p className="font-mono text-sm text-accent">{property.transactionType.toUpperCase()}</p>
             <h3 className="mt-2 text-2xl text-primary">{property.title}</h3>
           </div>
-          <p className="font-serif text-3xl text-primary">{formatPrice(property.price)}</p>
+          <p className="text-2xl font-semibold text-primary">{formatPrice(property.price)}</p>
         </div>
         <div className="flex items-center gap-2 text-sm text-muted">
           <MapPin className="h-4 w-4 text-accent" />

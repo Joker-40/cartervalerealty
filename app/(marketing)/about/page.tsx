@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { BRAND, SERVICE_AREAS } from '@/lib/constants';
 import { getAgents, getCompanyMetrics } from '@/lib/mock-data';
 import { AgentCard } from '@/modules/shared/agent-card';
@@ -15,12 +16,33 @@ export default function AboutPage() {
   const agents = getAgents();
 
   return (
-    <div className="mx-auto max-w-content space-y-16 px-4 py-16 sm:px-6 lg:px-8">
-      <SectionHeading
-        eyebrow="About Carter & Vale"
-        title="A brokerage built around clarity, premium execution, and disciplined market reads."
-        description={`${BRAND.name} serves Austin-area residential and commercial clients with an approach that blends advisory depth, client service, and high-signal interface design.`}
-      />
+    <div>
+      {/* Hero section with SVG background */}
+      <section className="relative overflow-hidden bg-primary">
+        <div className="absolute inset-0">
+          <Image
+            src="/svgs/about.svg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-primary/80" />
+        </div>
+        <div className="relative mx-auto max-w-content px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+          <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+            About Carter &amp; Vale
+          </span>
+          <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-tight text-white md:text-5xl">
+            A brokerage built around clarity, premium execution, and disciplined market reads.
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-white/70">
+            {BRAND.name} serves Austin-area residential and commercial clients with an approach that blends advisory depth, client service, and high-signal interface design.
+          </p>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-content space-y-16 px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid gap-5 lg:grid-cols-3">
         {metrics.map((metric) => (
           <StatCard key={metric.label} {...metric} />
@@ -61,6 +83,7 @@ export default function AboutPage() {
         {agents.map((agent) => (
           <AgentCard key={agent.id} agent={agent} />
         ))}
+      </div>
       </div>
     </div>
   );

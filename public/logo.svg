@@ -1,0 +1,80 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+
+<linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#f7d889"/>
+<stop offset="50%" stop-color="#d6a748"/>
+<stop offset="100%" stop-color="#b8892c"/>
+</linearGradient>
+
+<linearGradient id="silver" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="100%" stop-color="#cfd3d8"/>
+</linearGradient>
+
+</defs>
+
+
+<!-- C ring -->
+<path
+d="
+M120 40
+A82 82 0 1 0 120 216
+L120 188
+A54 54 0 1 1 120 68
+Z
+"
+fill="url(#gold)"
+/>
+
+
+<!-- background buildings -->
+
+<rect x="86" y="108" width="8" height="80" fill="#0d2230"/>
+<rect x="96" y="95" width="10" height="93" fill="#0d2230"/>
+<rect x="110" y="80" width="12" height="108" fill="#0d2230"/>
+
+
+<!-- main tower -->
+
+<polygon
+points="
+120,40
+148,72
+148,188
+120,188
+"
+fill="url(#gold)"
+/>
+
+
+<!-- tower highlight -->
+<polygon
+points="
+120,40
+148,72
+136,72
+120,56
+"
+fill="#ffe9b0"
+/>
+
+
+<!-- V mark -->
+
+<path
+d="
+M150 82
+L210 188
+L194 188
+L150 112
+L106 188
+L90 188
+Z
+"
+fill="url(#silver)"
+/>
+
+
+</svg>

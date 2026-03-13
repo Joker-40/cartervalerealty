@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   },
   description:
     'Premium real estate discovery and brokerage intelligence for Austin, Texas residential and commercial markets.',
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: 'Carter & Vale Realty Group',
     description:

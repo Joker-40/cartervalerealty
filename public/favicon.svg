@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#f7d889"/>
+      <stop offset="0.5" stop-color="#d6a748"/>
+      <stop offset="1" stop-color="#b8892c"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#cfd3d8"/>
+    </linearGradient>
+  </defs>
+  <path d=" M120 40 A82 82 0 1 0 120 216 L120 188 A54 54 0 1 1 120 68 Z " fill="url(#gold)"/>
+  <rect x="86" y="108" width="8" height="80" fill="#0d2230"/>
+  <rect x="96" y="95" width="10" height="93" fill="#0d2230"/>
+  <rect x="107.876" y="79.851" width="12" height="108" fill="#0d2230"/>
+  <polygon points="125.756 40 153.756 72 153.756 188 125.756 188" fill="url(#gold)"/>
+  <polygon points="&#10;120,40&#10;148,72&#10;136,72&#10;120,56&#10;" fill="#ffe9b0"/>
+  <path d="M 181.044 216.732 L 241.044 110.732 L 225.044 110.732 L 181.044 186.732 L 137.044 110.732 L 121.044 110.732 L 181.044 216.732 Z" fill="url(#silver)" style=""/>
+</svg>

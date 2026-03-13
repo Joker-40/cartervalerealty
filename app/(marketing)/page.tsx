@@ -23,14 +23,14 @@ export default function HomePage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/property-skyline.svg"
+            src="/hero-background.png"
             alt="Austin skyline"
             fill
             priority
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-primary/72" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/70" />
         </div>
         <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
           <div className="max-w-4xl">

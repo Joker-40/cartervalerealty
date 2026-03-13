@@ -1,14 +1,20 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Mail, Phone } from 'lucide-react';
 import type { AgentSummary } from '@/lib/types';
-import { initials } from '@/lib/utils';
 
 export function AgentCard({ agent }: { agent: AgentSummary }) {
   return (
     <article className="dashboard-card p-6">
       <div className="flex items-start gap-4">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-lg font-semibold text-white">
-          {initials(agent.name)}
+        <div className="relative h-16 w-16 overflow-hidden rounded-2xl">
+          <Image
+            src={agent.headshot}
+            alt={agent.name}
+            fill
+            className="object-cover"
+            sizes="64px"
+          />
         </div>
         <div className="min-w-0 flex-1">
           <p className="font-serif text-2xl text-primary">{agent.name}</p>

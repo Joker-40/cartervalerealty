@@ -137,8 +137,21 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           </div>
           <div className="dashboard-card p-6">
             <p className="text-xs uppercase tracking-[0.18em] text-accent">Assigned advisor</p>
-            <h2 className="mt-4 text-3xl text-primary">{property.agent.name}</h2>
-            <p className="mt-2 text-sm text-muted">{property.agent.title}</p>
+            <div className="mt-4 flex items-start gap-4">
+              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl">
+                <Image
+                  src={property.agent.headshot}
+                  alt={property.agent.name}
+                  fill
+                  className="object-cover"
+                  sizes="64px"
+                />
+              </div>
+              <div>
+                <h2 className="text-2xl text-primary">{property.agent.name}</h2>
+                <p className="mt-1 text-sm text-muted">{property.agent.title}</p>
+              </div>
+            </div>
             <p className="mt-4 text-sm leading-7 text-muted">{property.agent.bio}</p>
             <div className="mt-5 space-y-2 text-sm text-muted">
               <p>{property.agent.phone}</p>

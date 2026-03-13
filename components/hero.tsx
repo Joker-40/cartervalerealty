@@ -11,7 +11,7 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full bg-gray-200">
           <Image
-            src="https://cdn.abacus.ai/images/c6922e76-e427-4d9e-adb2-91a8ca664751.png"
+            src="/hero-background.png"
             alt="Luxury real estate"
             fill
             className="object-cover"
