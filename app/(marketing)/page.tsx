@@ -1,10 +1,9 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Star } from 'lucide-react';
-import { BRAND } from '@/lib/constants';
+import { ArrowRight } from 'lucide-react';
 import { getAgents, getCompanyMetrics, getFeaturedProperties, getInsights, getTestimonials } from '@/lib/mock-data';
 import { formatCompactNumber } from '@/lib/utils';
-import { HeroSearchForm } from '@/modules/home/hero-search-form';
+import { HomeHero } from '@/modules/home/home-hero';
+import { TestimonialsCarousel } from '@/modules/home/testimonials-carousel';
 import { PropertyCard } from '@/modules/listings/property-card';
 import { AgentCard } from '@/modules/shared/agent-card';
 import { InsightCard } from '@/modules/shared/insight-card';
@@ -20,40 +19,7 @@ export default function HomePage() {
 
   return (
     <div className="pb-20">
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/hero-background.png"
-            alt="Austin skyline"
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/70" />
-        </div>
-        <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
-          <div className="max-w-4xl">
-            <span className="eyebrow border-white/20 bg-white/10 text-white">Austin brokerage intelligence platform</span>
-            <h1 className="mt-6 text-5xl font-semibold leading-tight text-white md:text-7xl">
-              Premium discovery for real homes and smart capital decisions.
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/80 md:text-lg">
-              {BRAND.name} combines brokerage expertise, neighborhood analytics, and premium service design for
-              buyers, investors, and operators navigating Austin.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/properties" className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-primary shadow-gold">
-                Explore listings
-              </Link>
-              <Link href="/login" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white">
-                Broker login
-              </Link>
-            </div>
-          </div>
-          <HeroSearchForm />
-        </div>
-      </section>
+      <HomeHero />
 
       <section className="mx-auto mt-20 max-w-content px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -70,7 +36,7 @@ export default function HomePage() {
 
       <section className="mx-auto mt-20 max-w-content px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-2">
-          <Link href="/properties?segment=Commercial" className="surface-card overflow-hidden p-8">
+          <Link href="/properties?segment=Commercial" className="surface-card interactive-surface shimmer-border overflow-hidden p-8">
             <p className="text-xs uppercase tracking-[0.22em] text-accent">Commercial Properties</p>
             <h2 className="mt-4 text-4xl text-primary">Broker-grade leasing, retail, and mixed-use visibility.</h2>
             <p className="mt-4 max-w-lg text-sm leading-7 text-muted">
@@ -82,7 +48,7 @@ export default function HomePage() {
               <ArrowRight className="h-4 w-4" />
             </div>
           </Link>
-          <Link href="/properties?segment=Residential" className="surface-card overflow-hidden p-8">
+          <Link href="/properties?segment=Residential" className="surface-card interactive-surface shimmer-border overflow-hidden p-8">
             <p className="text-xs uppercase tracking-[0.22em] text-accent">Residential Homes</p>
             <h2 className="mt-4 text-4xl text-primary">Modern homes, refined search, and neighborhood intelligence.</h2>
             <p className="mt-4 max-w-lg text-sm leading-7 text-muted">
@@ -113,7 +79,7 @@ export default function HomePage() {
 
       <section className="mx-auto mt-20 max-w-content px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">
-          <div className="surface-card p-8">
+          <div className="surface-card interactive-surface p-8">
             <p className="text-xs uppercase tracking-[0.22em] text-accent">Intelligence layer</p>
             <h2 className="mt-4 text-4xl text-primary">Designed more like a financial product than a listing brochure.</h2>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-muted">
@@ -127,14 +93,14 @@ export default function HomePage() {
                 ['Saved client searches', formatCompactNumber(1920)],
                 ['Market signals reviewed weekly', formatCompactNumber(280)],
               ].map(([label, value]) => (
-                <div key={label} className="rounded-[22px] border border-stroke/60 bg-panel/50 p-4">
+                <div key={label} className="rounded-[22px] border border-stroke/60 bg-panel/50 p-4 transition hover:border-primary/12 hover:bg-panel/80">
                   <p className="text-xs uppercase tracking-[0.18em] text-muted">{label}</p>
                   <p className="mt-3 font-serif text-3xl text-primary">{value}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="surface-card p-8">
+          <div className="surface-card interactive-surface p-8">
             <p className="text-xs uppercase tracking-[0.22em] text-accent">Coverage</p>
             <h3 className="mt-4 text-3xl text-primary">Austin, Westlake, Mueller, The Domain, East Austin, Round Rock</h3>
             <p className="mt-5 text-sm leading-7 text-muted">
@@ -171,26 +137,8 @@ export default function HomePage() {
           title="Clients describe the experience as clear, data-driven, and unusually calm."
           description="The premium interface is supported by premium service delivery. The transaction should feel informed from the first search to the closing table."
         />
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <article key={testimonial.id} className="dashboard-card p-6">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-sm font-semibold text-white">
-                  {testimonial.avatarLabel}
-                </div>
-                <div>
-                  <p className="font-semibold text-primary">{testimonial.clientName}</p>
-                  <p className="text-sm text-muted">{testimonial.propertyType}</p>
-                </div>
-              </div>
-              <div className="mt-5 flex gap-1 text-accent">
-                {Array.from({ length: testimonial.rating }).map((_, index) => (
-                  <Star key={index} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-5 text-sm leading-7 text-muted">{testimonial.quote}</p>
-            </article>
-          ))}
+        <div className="mt-10">
+          <TestimonialsCarousel testimonials={testimonials} />
         </div>
       </section>
 

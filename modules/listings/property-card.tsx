@@ -18,18 +18,20 @@ export function PropertyCard({ property }: { property: PropertyDetailModel }) {
     <motion.article
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -6 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.45 }}
-      className="dashboard-card overflow-hidden"
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      className="group dashboard-card interactive-surface overflow-hidden"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={mediaAdapter.resolve(property.coverImage)}
           alt={property.title}
           fill
-          className="object-cover transition duration-500 hover:scale-105"
+          className="object-cover transition duration-700 group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/24 via-transparent to-transparent opacity-70" />
         <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             {property.badges.map((badge) => (
@@ -38,20 +40,22 @@ export function PropertyCard({ property }: { property: PropertyDetailModel }) {
               </span>
             ))}
           </div>
-          <button
+          <motion.button
             type="button"
             aria-label="Save property"
+            aria-pressed={isFavorite}
             onClick={() => {
               toggleFavorite(property.id);
               analyticsAdapter.track('favorite_toggled', { propertyId: property.id, favorite: !isFavorite });
             }}
+            whileTap={{ scale: 0.92 }}
             className={cn(
               'inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white/92 shadow-soft backdrop-blur',
               isFavorite ? 'border-accent text-accent' : 'border-white/60 text-primary',
             )}
           >
             <Heart className={cn('h-4 w-4', isFavorite && 'fill-current')} />
-          </button>
+          </motion.button>
         </div>
       </div>
       <div className="space-y-5 p-6">
@@ -75,7 +79,10 @@ export function PropertyCard({ property }: { property: PropertyDetailModel }) {
             {property.squareFeet.toLocaleString()} sq ft
           </span>
         </div>
-        <Link href={`/properties/${property.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+        <Link
+          href={`/properties/${property.slug}`}
+          className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:gap-3"
+        >
           View details
         </Link>
       </div>

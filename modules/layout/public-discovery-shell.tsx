@@ -24,7 +24,9 @@ export function PublicDiscoveryShell({
   return (
     <div className="min-h-screen bg-grid-fade">
       <PublicHeader />
-      <section className="border-b border-stroke/60 bg-white/72 backdrop-blur-xl">
+      <section className="relative overflow-hidden border-b border-stroke/60 bg-white/72 backdrop-blur-xl">
+        <div className="ambient-orb left-[10%] top-[-40px] h-32 w-32 bg-accent/15" />
+        <div className="ambient-orb right-[12%] top-[10%] h-40 w-40 bg-primary/8 [animation-delay:1.4s]" />
         <div className="mx-auto flex max-w-content flex-col gap-6 px-4 py-10 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
             <div className="max-w-3xl">
@@ -39,7 +41,7 @@ export function PublicDiscoveryShell({
               <GlobalSearch placeholder="Search Austin neighborhoods or addresses" />
               <Link
                 href={quickActionHref}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white shadow-gold transition hover:bg-primary/95"
+                className="interactive-surface shimmer-border inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white shadow-gold transition hover:bg-primary/95"
               >
                 <CalendarRange className="h-4 w-4" />
                 {quickActionLabel}

@@ -3,6 +3,7 @@
 import { startTransition, useDeferredValue, useState } from 'react';
 import type { FormEvent } from 'react';
 import { Search } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 export function GlobalSearch({ placeholder = 'Search Austin, listings, or agents' }: { placeholder?: string }) {
@@ -19,9 +20,12 @@ export function GlobalSearch({ placeholder = 'Search Austin, listings, or agents
   }
 
   return (
-    <form
+    <motion.form
+      initial={{ opacity: 0, x: 18 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       onSubmit={handleSubmit}
-      className="hidden flex-1 items-center gap-3 rounded-full border border-stroke/70 bg-surface/90 px-4 py-3 shadow-soft lg:flex"
+      className="hidden flex-1 items-center gap-3 rounded-full border border-stroke/70 bg-surface/90 px-4 py-3 shadow-soft transition focus-within:border-primary/25 focus-within:shadow-gold lg:flex"
     >
       <Search className="h-4 w-4 text-muted" />
       <input
@@ -30,6 +34,6 @@ export function GlobalSearch({ placeholder = 'Search Austin, listings, or agents
         className="w-full bg-transparent text-sm outline-none placeholder:text-muted"
         placeholder={placeholder}
       />
-    </form>
+    </motion.form>
   );
 }

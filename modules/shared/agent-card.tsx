@@ -1,52 +1,73 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Mail, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { fadeUp, gentleScale } from '@/lib/motion';
 import type { AgentSummary } from '@/lib/types';
 
 export function AgentCard({ agent }: { agent: AgentSummary }) {
   return (
-    <article className="dashboard-card p-6">
-      <div className="flex items-start gap-4">
-        <div className="relative h-16 w-16 overflow-hidden rounded-2xl">
-          <Image
-            src={agent.headshot}
-            alt={agent.name}
-            fill
-            className="object-cover"
-            sizes="64px"
-          />
+    <motion.article
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      whileHover="hover"
+      animate="rest"
+      viewport={{ once: true, amount: 0.2 }}
+      className="group dashboard-card interactive-surface overflow-hidden p-6"
+    >
+      <motion.div variants={gentleScale}>
+        <div className="flex items-start gap-4">
+          <div className="relative h-16 w-16 overflow-hidden rounded-2xl">
+            <Image
+              src={agent.headshot}
+              alt={agent.name}
+              fill
+              className="object-cover transition duration-500 group-hover:scale-105"
+              sizes="64px"
+            />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="font-serif text-2xl text-primary">{agent.name}</p>
+            <p className="mt-1 text-sm font-medium text-accent">{agent.title}</p>
+            <p className="mt-1 text-sm text-muted">{agent.yearsExperience} years experience</p>
+          </div>
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="font-serif text-2xl text-primary">{agent.name}</p>
-          <p className="mt-1 text-sm font-medium text-accent">{agent.title}</p>
-          <p className="mt-1 text-sm text-muted">{agent.yearsExperience} years experience</p>
+        <p className="mt-5 text-sm leading-7 text-muted">{agent.bio}</p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {agent.specialties.map((specialty) => (
+            <span key={specialty} className="rounded-full bg-panel px-3 py-2 text-xs font-medium text-primary">
+              {specialty}
+            </span>
+          ))}
         </div>
-      </div>
-      <p className="mt-5 text-sm leading-7 text-muted">{agent.bio}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {agent.specialties.map((specialty) => (
-          <span key={specialty} className="rounded-full bg-panel px-3 py-2 text-xs font-medium text-primary">
-            {specialty}
-          </span>
-        ))}
-      </div>
-      <div className="mt-6 space-y-3 text-sm text-muted">
-        <div className="flex items-center gap-2">
-          <Phone className="h-4 w-4 text-accent" />
-          {agent.phone}
+        <div className="mt-6 rounded-[22px] border border-stroke/60 bg-panel/45 p-4 text-sm text-muted">
+          <p className="text-xs uppercase tracking-[0.22em] text-accent">Market focus</p>
+          <p className="mt-2 font-medium text-primary">{agent.marketFocus}</p>
+          <p className="mt-3 text-xs uppercase tracking-[0.18em] text-muted">
+            {agent.listingsCount} active and recent listings
+          </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Mail className="h-4 w-4 text-accent" />
-          {agent.email}
+        <div className="mt-6 space-y-3 text-sm text-muted">
+          <div className="flex items-center gap-2">
+            <Phone className="h-4 w-4 text-accent" />
+            {agent.phone}
+          </div>
+          <div className="flex items-center gap-2">
+            <Mail className="h-4 w-4 text-accent" />
+            {agent.email}
+          </div>
         </div>
-      </div>
-      <Link
-        href={`/contact?agent=${encodeURIComponent(agent.name)}`}
-        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
-      >
-        Contact advisor
-        <ArrowRight className="h-4 w-4" />
-      </Link>
-    </article>
+        <Link
+          href={`/contact?agent=${encodeURIComponent(agent.name)}`}
+          className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+        >
+          Contact advisor
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </motion.div>
+    </motion.article>
   );
 }

@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { fadeUp } from '@/lib/motion';
 import type { LeadCapturePayload, PropertyDetailModel } from '@/lib/types';
 import { leadCaptureSchema, type LeadCaptureSchema } from '@/lib/schemas';
 
@@ -52,7 +54,13 @@ export function LeadForm({ property }: { property?: PropertyDetailModel }) {
   }
 
   return (
-    <div className="dashboard-card p-5">
+    <motion.div
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      className="dashboard-card p-5"
+    >
       <h3 className="text-2xl text-primary">Request property intelligence</h3>
       <p className="mt-2 text-sm leading-6 text-muted">
         {property
@@ -63,18 +71,18 @@ export function LeadForm({ property }: { property?: PropertyDetailModel }) {
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block text-sm text-muted">
             Name
-            <input {...register('name')} className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none" />
+            <input {...register('name')} className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none transition focus:border-primary/30 focus:bg-white" />
             {errors.name ? <span className="mt-1 block text-xs text-danger">{errors.name.message}</span> : null}
           </label>
           <label className="block text-sm text-muted">
             Email
-            <input {...register('email')} className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none" />
+            <input {...register('email')} className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none transition focus:border-primary/30 focus:bg-white" />
             {errors.email ? <span className="mt-1 block text-xs text-danger">{errors.email.message}</span> : null}
           </label>
         </div>
         <label className="block text-sm text-muted">
           Phone
-          <input {...register('phone')} className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none" />
+          <input {...register('phone')} className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none transition focus:border-primary/30 focus:bg-white" />
           {errors.phone ? <span className="mt-1 block text-xs text-danger">{errors.phone.message}</span> : null}
         </label>
         <label className="block text-sm text-muted">
@@ -82,19 +90,31 @@ export function LeadForm({ property }: { property?: PropertyDetailModel }) {
           <textarea
             {...register('message')}
             rows={5}
-            className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none"
+            className="mt-2 w-full rounded-2xl border border-stroke/70 bg-panel/40 px-4 py-3 text-primary outline-none transition focus:border-primary/30 focus:bg-white"
           />
           {errors.message ? <span className="mt-1 block text-xs text-danger">{errors.message.message}</span> : null}
         </label>
-        <button
+        <motion.button
           type="submit"
           disabled={isSubmitting}
+          whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
           className="inline-flex w-full items-center justify-center rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-gold disabled:opacity-60"
         >
           {isSubmitting ? 'Sending…' : 'Request info'}
-        </button>
+        </motion.button>
       </form>
-      {successMessage ? <p className="mt-4 text-sm text-success">{successMessage}</p> : null}
-    </div>
+      <AnimatePresence>
+        {successMessage ? (
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="mt-4 rounded-2xl bg-success/10 px-4 py-3 text-sm text-success"
+          >
+            {successMessage}
+          </motion.p>
+        ) : null}
+      </AnimatePresence>
+    </motion.div>
   );
 }

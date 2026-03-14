@@ -1,11 +1,20 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { fadeUp } from '@/lib/motion';
 import type { MarketSeries } from '@/lib/types';
 
 export function LineChartCard({ series }: { series: MarketSeries }) {
   return (
-    <article className="dashboard-card p-5">
+    <motion.article
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      whileHover={{ y: -4 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="dashboard-card interactive-surface p-5"
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-primary">{series.title}</p>
@@ -23,6 +32,6 @@ export function LineChartCard({ series }: { series: MarketSeries }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </article>
+    </motion.article>
   );
 }
