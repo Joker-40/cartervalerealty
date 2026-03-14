@@ -16,6 +16,11 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const metrics = getCompanyMetrics();
   const agents = getAgents();
+  const principles = [
+    { label: 'Clarity first', icon: Sparkles },
+    { label: 'Market context', icon: Landmark },
+    { label: 'Disciplined execution', icon: Compass },
+  ] as const;
 
   return (
     <div>
@@ -54,17 +59,13 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              {[
-                ['Clarity first', Sparkles],
-                ['Market context', Landmark],
-                ['Disciplined execution', Compass],
-              ].map(([label, Icon]) => {
-                const CardIcon = Icon as typeof Compass;
+              {principles.map((principle) => {
+                const CardIcon = principle.icon;
 
                 return (
-                  <div key={label} className="rounded-[22px] border border-stroke/60 bg-panel/55 p-4">
+                  <div key={principle.label} className="rounded-[22px] border border-stroke/60 bg-panel/55 p-4">
                     <CardIcon className="h-5 w-5 text-accent" />
-                    <p className="mt-3 text-sm font-semibold text-primary">{label}</p>
+                    <p className="mt-3 text-sm font-semibold text-primary">{principle.label}</p>
                   </div>
                 );
               })}

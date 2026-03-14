@@ -13,6 +13,11 @@ export const metadata: Metadata = {
 export default function AgentsPage() {
   const agents = getAgents();
   const specialties = ['Luxury residences', 'Commercial representation', 'Investor advisory', 'Relocation strategy'];
+  const coverageCards = [
+    { title: 'Residential', detail: 'Buyer positioning and premium tour strategy', icon: Building2 },
+    { title: 'Commercial', detail: 'Leasing logic and operator fit', icon: BriefcaseBusiness },
+    { title: 'Investor', detail: 'Yield, risk, and exit-minded framing', icon: Sparkles },
+  ] as const;
 
   return (
     <div>
@@ -52,20 +57,16 @@ export default function AgentsPage() {
             <div className="relative">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/62">Advisory coverage</p>
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                {[
-                  ['Residential', 'Buyer positioning and premium tour strategy', Building2],
-                  ['Commercial', 'Leasing logic and operator fit', BriefcaseBusiness],
-                  ['Investor', 'Yield, risk, and exit-minded framing', Sparkles],
-                ].map(([title, detail, Icon]) => {
-                  const MetricIcon = Icon as typeof Building2;
+                {coverageCards.map((card) => {
+                  const MetricIcon = card.icon;
 
                   return (
-                    <div key={title} className="rounded-[24px] border border-white/10 bg-white/8 p-5 backdrop-blur-sm">
-                      <div className="rounded-2xl bg-white/10 p-3 text-accent w-fit">
+                    <div key={card.title} className="rounded-[24px] border border-white/10 bg-white/8 p-5 backdrop-blur-sm">
+                      <div className="w-fit rounded-2xl bg-white/10 p-3 text-accent">
                         <MetricIcon className="h-5 w-5" />
                       </div>
-                      <p className="mt-4 text-lg font-semibold">{title}</p>
-                      <p className="mt-2 text-sm leading-7 text-white/72">{detail}</p>
+                      <p className="mt-4 text-lg font-semibold">{card.title}</p>
+                      <p className="mt-2 text-sm leading-7 text-white/72">{card.detail}</p>
                     </div>
                   );
                 })}

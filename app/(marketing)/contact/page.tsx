@@ -11,6 +11,24 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const nextSteps = [
+    {
+      title: 'Share context',
+      detail: 'Tell us whether this is residential, commercial, or investment-focused.',
+      icon: Sparkles,
+    },
+    {
+      title: 'Get matched',
+      detail: 'We connect you with the right advisor for the opportunity and timeline.',
+      icon: PhoneCall,
+    },
+    {
+      title: 'Set the next step',
+      detail: 'Tour, underwriting review, or strategy call depending on what you need.',
+      icon: CalendarRange,
+    },
+  ] as const;
+
   return (
     <div>
       <MarketingHero
@@ -44,22 +62,18 @@ export default function ContactPage() {
               <div className="relative">
                 <p className="text-xs uppercase tracking-[0.22em] text-white/62">What happens next</p>
                 <div className="mt-8 space-y-4">
-                  {[
-                    ['Share context', 'Tell us whether this is residential, commercial, or investment-focused.', Sparkles],
-                    ['Get matched', 'We connect you with the right advisor for the opportunity and timeline.', PhoneCall],
-                    ['Set the next step', 'Tour, underwriting review, or strategy call depending on what you need.', CalendarRange],
-                  ].map(([title, detail, Icon]) => {
-                    const StepIcon = Icon as typeof CalendarRange;
+                  {nextSteps.map((step) => {
+                    const StepIcon = step.icon;
 
                     return (
-                      <div key={title} className="rounded-[24px] border border-white/10 bg-white/8 p-5 backdrop-blur-sm">
+                      <div key={step.title} className="rounded-[24px] border border-white/10 bg-white/8 p-5 backdrop-blur-sm">
                         <div className="flex items-start gap-4">
                           <div className="rounded-2xl bg-white/10 p-3 text-accent">
                             <StepIcon className="h-5 w-5" />
                           </div>
                           <div>
-                            <p className="text-lg font-semibold">{title}</p>
-                            <p className="mt-2 text-sm leading-7 text-white/72">{detail}</p>
+                            <p className="text-lg font-semibold">{step.title}</p>
+                            <p className="mt-2 text-sm leading-7 text-white/72">{step.detail}</p>
                           </div>
                         </div>
                       </div>
